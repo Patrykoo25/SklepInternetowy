@@ -17,5 +17,8 @@
 <body>
     <a href="login.php">login</a>
     <a href="register.php">register</a>
+ <?php
+ require_once "../kodphp/liczbaDostepnychOgloszen.php"; 
+ ?>
 </body>
 </html>

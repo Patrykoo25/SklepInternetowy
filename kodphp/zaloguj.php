@@ -29,6 +29,7 @@ if ($polaczenie->connect_errno == 0) {
                 $_SESSION['zalogowany'] = true;
                 $_SESSION['name'] = $wiersz['user'];
                 $_SESSION['id'] = $wiersz['id'];
+                $_SESSION['admin'] = $wiersz['isAdmin'];
                 
                 unset($_SESSION['blad']);
                 header('Location: ../strona/main.php');

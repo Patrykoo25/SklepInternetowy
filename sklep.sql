@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 31 Sty 2024, 11:39
+-- Czas generowania: 31 Sty 2024, 13:30
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.0.25
 
@@ -24,6 +24,33 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `produkty`
+--
+
+CREATE TABLE `produkty` (
+  `id` int(11) NOT NULL,
+  `nazwa` varchar(225) NOT NULL,
+  `cena` int(225) NOT NULL,
+  `opis` varchar(512) NOT NULL,
+  `waga` int(64) NOT NULL,
+  `dodatkoweInfo` varchar(225) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `produktyimages`
+--
+
+CREATE TABLE `produktyimages` (
+  `id` int(11) NOT NULL,
+  `produktyid` int(11) NOT NULL,
+  `linkimg` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `user`
 --
 
@@ -32,20 +59,34 @@ CREATE TABLE `user` (
   `user` varchar(225) NOT NULL,
   `pass` varchar(225) NOT NULL,
   `pass_hashed` varchar(255) NOT NULL,
-  `email` varchar(225) NOT NULL
+  `email` varchar(225) NOT NULL,
+  `isAdmin` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Zrzut danych tabeli `user`
 --
 
-INSERT INTO `user` (`id`, `user`, `pass`, `pass_hashed`, `email`) VALUES
-(1, 'Patryk', '$2y$10$aJZu2vZTCya8kAsNSqQAAuem/xsNfMk84VHQAwY23TV2P9rKH4ZoO', '', 'patryksuper0070@gmail.com'),
-(2, 'Patrykk', '$2y$10$9y/7rdFqIxefIcKABw6zPO3w0Y7Um5n6gm3DuCxhtXValG1yCKP1i', '', 'WRONA@GMAIL.COM');
+INSERT INTO `user` (`id`, `user`, `pass`, `pass_hashed`, `email`, `isAdmin`) VALUES
+(5, 'Patryk', '$2y$10$KXxXyKaq9WQw5pvv3QVb6.a8W29E0rt8j7b./1VBgN2u/NHzyRhwC', '', 'patryksuper0070@gmail.com', 0),
+(6, 'Klaudia', '$2y$10$eqdStrmmBDhDT16RZq9xxORzaR6gKl40S88ROeXhCG075nmqIhwN6', '', 'patryksuper0070@gmail.com', 1);
 
 --
 -- Indeksy dla zrzutów tabel
 --
+
+--
+-- Indeksy dla tabeli `produkty`
+--
+ALTER TABLE `produkty`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `produktyimages`
+--
+ALTER TABLE `produktyimages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `produktyid` (`produktyid`);
 
 --
 -- Indeksy dla tabeli `user`
@@ -58,10 +99,38 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT dla tabeli `produkty`
+--
+ALTER TABLE `produkty`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT dla tabeli `produktyimages`
+--
+ALTER TABLE `produktyimages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT dla tabeli `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- Ograniczenia dla zrzutów tabel
+--
+
+--
+-- Ograniczenia dla tabeli `produkty`
+--
+ALTER TABLE `produkty`
+  ADD CONSTRAINT `produkty_ibfk_1` FOREIGN KEY (`id`) REFERENCES `produktyimages` (`produktyid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ograniczenia dla tabeli `produktyimages`
+--
+ALTER TABLE `produktyimages`
+  ADD CONSTRAINT `fk_produkty_id` FOREIGN KEY (`produktyid`) REFERENCES `produkty` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

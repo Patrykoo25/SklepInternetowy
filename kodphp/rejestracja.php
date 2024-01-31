@@ -27,8 +27,8 @@ if ($polaczenie->connect_errno == 0) {
         if ($stmt) {
             $stmt->bind_param("sss", $login, $hashed_password, $email);
             if ($stmt->execute()) {
-                $_SESSION['zalogowany'] = true;
-                $_SESSION['name'] = $login;
+                // $_SESSION['zalogowany'] = true;
+                // $_SESSION['name'] = $login;
                 unset($_SESSION['blad_rejestracji']);
                 header('Location: ../strona/login.php');
                 exit();
