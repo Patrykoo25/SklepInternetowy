@@ -18,6 +18,7 @@
     <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
+<a href="register.php">register</a>
 <form action="../kodphp/zaloguj.php" method="post">
     <div>
     <label for="emailInput">Login:</label>

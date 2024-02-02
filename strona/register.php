@@ -18,7 +18,7 @@ if (isset($_SESSION['zalogowany']) && ($_SESSION['zalogowany'] == true)) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>Rejestracja</title>
 </head>
-
+<a href="login.php">login</a>
 <body>
     <main>
         <form action="../kodphp/rejestracja.php" method="post">

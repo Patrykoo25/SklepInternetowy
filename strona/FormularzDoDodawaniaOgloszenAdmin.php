@@ -53,7 +53,7 @@ if(!isset($_SESSION['zalogowany']) || $_SESSION['admin'] != 1)
 
                 </div>
 
-                <input type="submit">
+                <input type="submit" name="przyciskPrzegladaj">
             </form>
 </body>
 </html>
